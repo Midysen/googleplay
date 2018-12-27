@@ -86,7 +86,6 @@ class WebDriverTests(unittest.TestCase):
 
 
 
-
     @classmethod
     def tearDownClass(cls):
         # close the browser window
