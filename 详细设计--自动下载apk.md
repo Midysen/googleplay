@@ -35,7 +35,7 @@ def get_all():
 
     print("get_all")
 ```
- - 此函数的作用是根据get_category()函数获得不重复的所有类别，根据不同类别，对应不同账号，启动对应线程，执行download函数，传递类别和用户名、密码，下载对应apk文件
+ - 此函数的作用是根据get_category()函数获得不重复的所有类别，根据不同类别，对应不同账号（此处暂时只实现了两个类别），启动对应线程，线程执行download函数，传递类别和用户名、密码，下载对应apk文件
 
 
 
@@ -53,10 +53,10 @@ def get_category():
     for item in news:
         if item not in news_items:
             news_items.append(item)
-    print(news_items)
+   
     return news_items
 ```
-
+- 此函数是从数据库根据数据库字段apk_category_1获取所有类别，并去重
 # download函数定义：
 ```
 def download(category,username,passwd):
@@ -164,7 +164,7 @@ def download(category,username,passwd):
                 print()
         except BaseException:
             driver.quit()
-            #goto .start
             continue
         driver.quit()
 ```
+- 此函数的作用是根据传递过来的参数类别名查寻数据库，得到此类别中所有应用的app下载地址，利用selenium库，实现自动输入用户名密码，实现自动登录，并且自动点击安装按钮，下载完毕自动关闭浏览器；并添加了条件判断，如果已经安装过此应用，直接退出浏览器；并且增加了超时检测
