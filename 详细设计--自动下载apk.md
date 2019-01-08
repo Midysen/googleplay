@@ -35,7 +35,7 @@ def get_all():
 
     print("get_all")
 ```
-   - 此函数的作用是根据get_category()函数获得不重复的所有类别，根据不同类别，对应不同账号，启动对应线程，执行download函数，传递类别和用户名、密码，下载对应apk文件
+ - 此函数的作用是根据get_category()函数获得不重复的所有类别，根据不同类别，对应不同账号，启动对应线程，执行download函数，传递类别和用户名、密码，下载对应apk文件
 
 
 
@@ -57,7 +57,7 @@ def get_category():
     return news_items
 ```
 
-- download函数定义：
+# download函数定义：
 ```
 def download(category,username,passwd):
     
