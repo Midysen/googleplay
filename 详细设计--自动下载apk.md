@@ -2,3 +2,16 @@
 -根据类别在数据库查找某一类别的所有应用的下载地址，使用多线程自动实现某一类别的应用下载，包括用户自动登录
 # 参考代码：
 [login_all.py](https://github.com/Midysen/googleplay/blob/master/login_all.py)
+
+# 代码设计：
+```
+ class ApkinfoItem(scrapy.Item):
+     # define the fields for your item here like:
+     # name = scrapy.Field()
+     apk_name = scrapy.Field()
+     apk_star = scrapy.Field()
+     apk_downurl = scrapy.Field()
+     apk_icon = scrapy.Field()
+     apk_review = scrapy.Field()
+     apk_movie = scrapy.Field()
+```
