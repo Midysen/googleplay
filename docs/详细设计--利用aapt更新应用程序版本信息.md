@@ -18,3 +18,22 @@ do
 done
 
 ```
+# python脚本设计：
+```
+#调用shell脚本，使用aapt解析出所有apk文件中的信息
+str=os.popen('./aapt.sh')
+s=str.read()
+
+num=0
+while num < len(s.split("\n"))-1:
+    versionName=s.split("\n")[num]
+    packageName=s.split("\n")[num+1]
+    versionCode=s.split("\n")[num+2]
+    fileSize=s.split("\n")[num+3]
+    #根据包名查询数据库，将信息插入数据库
+    db.apkinfo.update({'apk_packageName':packageName},{'$set' : {'apk_versionName':versionName}})
+    db.apkinfo.update({'apk_packageName':packageName},{'$set' : {'apk_versionCode':versionCode}})
+    db.apkinfo.update({'apk_packageName':packageName},{'$set' : {'apk_fileSize':fileSize}})
+    num += 4
+
+```
