@@ -3,14 +3,13 @@
 # 参考代码：
 [login_all.py](https://github.com/Midysen/googleplay/blob/master/login_all.py)
 
-# 代码设计：
-- 代码入口
+# 程序入口
 ```
 if __name__ == "__main__":
     get_all()
     print("end")
 ```
-- get_all()函数定义：
+# get_all()函数定义：
 ```
 def get_all():
     
@@ -41,7 +40,7 @@ def get_all():
 
 
 
-- get_category()函数定义：
+# get_category()函数定义：
 ```
 def get_category():
      #从数据库中获得所有类别
