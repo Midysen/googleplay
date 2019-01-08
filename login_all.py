@@ -133,7 +133,8 @@ def download(category,username,passwd):
                 print()
         except BaseException:
             driver.quit()
-            goto .start
+            #goto .start
+            continue
         driver.quit()
 
 
@@ -155,10 +156,10 @@ def get_all():
             passwd="123abc$%^789"
             t=threading.Thread(target=download,args=(category,username,passwd))
             threads.append(t)
-        print("for")
+    
+    for thread in threads:
+        thread.start()
 
-    threads[0].start()
-    threads[1].start()
     print("get_all")
 
 if __name__ == "__main__":
