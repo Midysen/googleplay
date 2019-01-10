@@ -68,7 +68,7 @@ if __name__ == '__main__':
                 
                 target = "image/" + each + ".png"
                 db.apkinfo.update({'apk_packageName':each},{'$set' : {'icon':target}})
-                
+                #判断图片是否已经在目录下存在，如果不存在再去下载
                 if target not in images:
                     try:
                         urlretrieve(uu,target,schedule)
