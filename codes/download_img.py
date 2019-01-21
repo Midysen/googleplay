@@ -28,22 +28,34 @@ def get_packageNames():
         if item not in news_items:
             news_items.append(item)
     #print(news_items)
-    return news_items
+    return news
 
 def download_icon():
     packages = get_packageNames()
     icons = []
     icon_urls = {}
     for each in packages:
-        #db.apkinfo.find_one({"apk_packageName":each})['apk_icon'][0]
-        icon_urls={each:db.apkinfo.find_one({"apk_packageName":each})['apk_icon'][0]}
-        icons.append(icon_urls)
-    #print(icons)
+        cursor=db.apkinfo.find_one({"apk_packageName":each})
+        #if ('apk_icon' in cursor) and ('icon' not in cursor) :
+        if ('apk_icon' in cursor):
+            icon_urls={each:cursor['apk_icon'][0]}
+            icons.append(icon_urls)
+        else:
+            continue
     
     return icons
         
 
 def get_images():
+    images_list = []
+    rootdir='image/'
+    list = os.listdir(rootdir) #列出文件夹下所有的目录与文件
+    for i in range(0,len(list)):
+        path = os.path.join(rootdir,list[i])
+        if os.path.isfile(path) and os.path.basename(path).endswith(".png"):
+            images_list.append(path)
+    return images_list
+    """
     str=os.popen('./img.sh')
     s=str.read()
     images=[]
@@ -52,6 +64,7 @@ def get_images():
         images.append(s.split("\n")[num])
         num = num+1
     return images
+    """
 
 if __name__ == '__main__':
     packages = get_packageNames()
@@ -65,10 +78,11 @@ if __name__ == '__main__':
                 uu=url[each][:-3]
              
                 images=get_images()
-                
-                target = "image/" + each + ".png"
+                #appstore解析显示需要icon字段 
+                target = "icon/" + each + ".png"
                 db.apkinfo.update({'apk_packageName':each},{'$set' : {'icon':target}})
-                #判断图片是否已经在目录下存在，如果不存在再去下载
+                #下载的png图标统一放到image目录下 
+                target = "image/" + each + ".png"
                 if target not in images:
                     try:
                         urlretrieve(uu,target,schedule)
