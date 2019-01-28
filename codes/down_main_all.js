@@ -3,9 +3,6 @@ const account = `zhangdali2020@gmail.com`;
 const password = `123abc$%^789`;
 
 
-
-
-
 // This is where we'll put the code to get around the tests.
 const preparePageForTests = async (page) => {
     // // Pass the User-Agent Test.
@@ -101,9 +98,6 @@ async function download(url) {
 }
 
 
-
-
-
 //connect mongodb
 //const get_down_url = async () => {
 async function get_down_url(){
@@ -146,12 +140,6 @@ async function get_down_url(){
    
      return arrs;
 }
-
-
-
-
-
-
 
 
 
