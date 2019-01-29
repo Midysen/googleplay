@@ -1,4 +1,4 @@
-1、解压apkinfo_v1.1.5.tar.bz2，进入apkinfo_v1.1-CN 目录下，运行 stracpy crawl google， 首先抓取google play上应用程序的信息
+1、解压apkinfo_v1.1.5.tar.bz2，进入apkinfo_v1.1-CN 目录下，运行 scrapy crawl google， 首先抓取google play上应用程序的信息
 2、运行 login_all.py , 完成自动登录下载apk（2019.01.21日发现，google play反爬了selenium框架，需要输入验证码和手机短信验证，目前没有解决）
 3、拷贝对应搭载openthos系统的设备下/data/app目录下的所有已经安装的应用对应的apk文件所在的目录
 4、运行aapt.py，根据apk文件得到版本等信息，更新数据库，其中会调用aapt.sh脚本，实现以包名重命名所有base.apk文件，并拷贝到download目录下
