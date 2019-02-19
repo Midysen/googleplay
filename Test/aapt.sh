@@ -1,8 +1,15 @@
 #!/bin/bash
 
+
+dir="./download/"
 #for apk in `ls /home/openthos/Downloads/app/*/*.apk`
-for apk in `ls /media/openthos/*/apk/*/base.apk`
+cp /home/openthos/Downloads/app . -a
+for apk in `ls ./app/*/base.apk`
 do
+    if [ ! -d $dir ]
+    then
+        mkdir  $dir
+    fi
     a=`aapt dump badging $apk | grep versionName | cut -d "'" -f 2`.apk
     cp $apk ./download/$a
     #versionName
