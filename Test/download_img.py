@@ -50,6 +50,7 @@ def download_icon():
 def get_images():
     images_list = []
     rootdir='image/'
+    
     if not os.path.exists(rootdir):
         os.mkdir(rootdir)
     list = os.listdir(rootdir) #列出文件夹下所有的目录与文件
