@@ -15,14 +15,15 @@ def schedule(a,b,c):
         per = 100
     print('%.2f%%' % per)
  
-#获得所有包名称并去重    
 def get_packageNames():
      #从数据库中获得所有包名称
     packageNames=db.apkinfo.find({},{"apk_packageName":1,"_id":0})
     news = []
     for each in packageNames:
-        news.append(each['apk_packageName'])
-        
+        print(each)
+        if 'apk_packageName' in each:
+            news.append(each['apk_packageName'])
+
     news_items = []
     for item in news:
         if item not in news_items:
@@ -49,6 +50,8 @@ def download_icon():
 def get_images():
     images_list = []
     rootdir='image/'
+    if not os.path.exists(rootdir):
+        os.mkdir(rootdir)
     list = os.listdir(rootdir) #列出文件夹下所有的目录与文件
     for i in range(0,len(list)):
         path = os.path.join(rootdir,list[i])
