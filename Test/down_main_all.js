@@ -3,6 +3,63 @@ const account = `zhangdali2020@gmail.com`;
 const password = `123abc$%^789`;
 
 
+
+/*
+npm i nodemailer
+使用：
+
+*/
+const nodemailer  = require("nodemailer");
+
+// 参数：发件人，邮件标题别名，收件人，主题，正文（支持html格式）
+function sendMail(from, aliasName, tos, subject, msg)
+{
+    const smtpTransport = nodemailer.createTransport({
+    host: 'smtp.qq.com',
+    secureConnection: true, // use SSL
+    secure: true,
+    port: 465,
+    auth: {
+        user: from,
+        pass: 'djqeaewplmewbdch',
+    }
+    });
+
+    smtpTransport.sendMail({
+        //from    : '标题别名 <foobar@latelee.org>',
+        from    : aliasName + ' ' + '<' + from + '>',
+        //收件人邮箱，多个邮箱地址间用英文逗号隔开
+        to      : tos,
+        subject : subject,//邮件主题
+        //text    : msg,
+        html    : msg
+    }, function(err, res) {
+        if (err)
+        {
+            console.log('error: ', err);
+        }
+    });
+}
+/*
+function nl2br(str, isXhtml) {
+    var breakTag = (isXhtml || typeof isXhtml === 'undefined') ? '<br />' : '<br>';
+    var str = (str + '').replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&apos;");
+    return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + breakTag + '$2');
+};
+*/
+function email(position,error)
+{
+    sendMail('759381818@qq.com', '下载apk出现问题', "miaodexing@openthos.org", 
+            position,
+            error);
+}
+
+
+
+
+
+
+
 // This is where we'll put the code to get around the tests.
 const preparePageForTests = async (page) => {
     // // Pass the User-Agent Test.
@@ -133,6 +190,7 @@ async function download(url) {
         
     }catch(e){
         console.log("exception");
+        email(url,e.stack);
         console.log(e.stack);
         await browser.close();
     }finally{
