@@ -5,9 +5,8 @@ const password = `123abc$%^789`;
 
 
 /*
-npm i nodemailer
 使用：
-
+npm i nodemailer
 */
 const nodemailer  = require("nodemailer");
 
@@ -49,15 +48,10 @@ function nl2br(str, isXhtml) {
 */
 function email(position,error)
 {
-    sendMail('759381818@qq.com', '下载apk出现问题', "miaodexing@openthos.org", 
+    sendMail('759381818@qq.com', 'download error', "miaodexing@openthos.org", 
             position,
             error);
 }
-
-
-
-
-
 
 
 // This is where we'll put the code to get around the tests.
@@ -138,7 +132,7 @@ async function download(url) {
     const browser = await puppeteer.launch({headless: false});//
     const page = await browser.newPage();//
     await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36 Edge/16.16299') 
-    page.setDefaultNavigationTimeout(20000)
+    page.setDefaultNavigationTimeout(30000)
 
 
     //反探测代码
@@ -146,7 +140,7 @@ async function download(url) {
 
     try{
         await page.goto(url)
-        await page.waitFor(3000);
+        await page.waitFor(4000);
     
         console.log("login");
     
@@ -174,16 +168,12 @@ async function download(url) {
         console.log("passwordNext");
         await page.waitFor(6000);
         let frame = page.frames()[2];
-        
-        //console.log(frame)
         console.log("1");
        
         await page.waitFor(8000);
         console.log("2");
-        //#purchase-ok-button
-        await page.waitForSelector("#purchase-ok-button");
         await frame.click('#purchase-ok-button');
-        //await page.waitForSelector('#purchase-ok-button',{timeout: 6000});
+        await page.waitForSelector('#purchase-ok-button',{timeout: 2000});
         await page.waitFor(8000);
         console.log("purchase-ok-button");
         await isDownload(url);
